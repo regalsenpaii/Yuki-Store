@@ -1,0 +1,8 @@
+{
+  "name": "yuki-regal",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "baileys": "^6.6.0" 
+  }
+}
