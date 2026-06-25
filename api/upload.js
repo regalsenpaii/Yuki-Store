@@ -13,8 +13,13 @@ export default async function handler(req, res) {
         
         // AMBIL TOKEN DARI SISTEM INTERNAL VERCEL
         const token = process.env.REGAL_GITHUB_TOKEN; 
-        const owner = "egasenpai";
-        const repo = "yuki-regal";
+        
+        // Sesuaikan dengan data repository aktif kamu
+        const owner = "regalsenpaii";
+        const repo = "Yukii-Store";
+        
+        // Domain yang kamu minta untuk output URL gambarnya
+        const myDomain = "https://yuki-regal.vercel.app";
 
         if (!token) {
             return res.status(500).json({ error: 'Token REGAL_GITHUB_TOKEN tidak ditemukan di Environment Variables Vercel.' });
@@ -24,12 +29,10 @@ export default async function handler(req, res) {
         const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${fileName}`, {
             method: 'PUT',
             headers: {
-                // Menggunakan Bearer agar mendukung Fine-grained token & Classic token terbaru
                 "Authorization": `Bearer ${token}`, 
                 "Accept": "application/vnd.github.v3+json",
                 "Content-Type": "application/json",
-                // WAJIB disertakan untuk menghindari error 403 dari GitHub API
-                "User-Agent": "Vercel-Serverless-Upload-Proxy" 
+                "User-Agent": "YukiStore-Vercel-Upload-Proxy" 
             },
             body: JSON.stringify({
                 message: `Upload otomatis via Web API`,
@@ -42,7 +45,11 @@ export default async function handler(req, res) {
             return res.status(500).json({ error: `Gagal ke GitHub: ${response.status} - ${errorText}` });
         }
 
-        return res.status(200).json({ success: true });
+        // Mengembalikan respons sukses beserta URL gabungan domain pilihanmu
+        return res.status(200).json({ 
+            success: true,
+            download_url: `${myDomain}/${fileName}`
+        });
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
