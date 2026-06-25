@@ -15,8 +15,8 @@ export default async function handler(req, res) {
         const token = process.env.REGAL_GITHUB_TOKEN; 
         
         // Sesuaikan dengan data repository aktif kamu
-        const owner = "regalsenpaii";
-        const repo = "Yukii-Store";
+        const owner = "egasenpai";
+        const repo = "yuki-regal";
         
         // Domain yang kamu minta untuk output URL gambarnya
         const myDomain = "https://yuki-regal.vercel.app";
